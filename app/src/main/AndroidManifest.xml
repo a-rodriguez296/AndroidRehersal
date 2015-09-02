@@ -27,6 +27,9 @@
             android:configChanges="orientation|screenSize|keyboard">
 
         </activity>
+        <activity
+            android:name=".controller.SettingsActivity">
+        </activity>
     </application>
 
 </manifest>

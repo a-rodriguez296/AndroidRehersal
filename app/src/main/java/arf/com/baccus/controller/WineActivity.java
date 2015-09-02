@@ -3,7 +3,11 @@ package arf.com.baccus.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,7 +19,11 @@ import arf.com.baccus.R;
 import arf.com.baccus.model.Wine;
 
 
-public class WineActivity extends Activity {
+public class WineActivity extends AppCompatActivity {
+
+    private static final int SETTINGS_REQUEST = 1;
+    private static final String STATE_IMAGE_SCALE_TYPE = "STATE_IMAGE_SCALE_TYPE";
+
 
     //Vistas
     private ImageView mWineImage = null;
@@ -43,6 +51,12 @@ public class WineActivity extends Activity {
         Log.v("Baccus", "Hola mundo");
 
         mWineImage = (ImageView) findViewById(R.id.wine_image);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_IMAGE_SCALE_TYPE)){
+
+            mWineImage.setScaleType((ImageView.ScaleType) savedInstanceState.getSerializable(STATE_IMAGE_SCALE_TYPE));
+        }
+
         mWine = new Wine("Vegaval","Tinto",R.drawable.logo_facebook,"Casillero del diablo", "http://eltiempo.com","adsfasdfadsf1","Valdepeñas",3);
 
         //Añadir tipos de uvas
@@ -99,5 +113,58 @@ public class WineActivity extends Activity {
     public void changeImage(View v){
 
         mWineImage.setImageResource(mWine.getPhoto());
+    }
+
+
+
+    //Menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_wine, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if (item.getItemId() == R.id.menu_settings) {
+
+
+            Intent settingsIntent = new Intent(WineActivity.this, SettingsActivity.class);
+            settingsIntent.putExtra(SettingsActivity.EXTRA_WINE_IMAGE_SCALE_TYPE, mWineImage.getScaleType());
+            startActivityForResult(settingsIntent, SETTINGS_REQUEST);
+
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SETTINGS_REQUEST && resultCode == RESULT_OK){
+
+            ImageView.ScaleType scaleType = (ImageView.ScaleType) data.getSerializableExtra(SettingsActivity.EXTRA_WINE_IMAGE_SCALE_TYPE);
+            mWineImage.setScaleType(scaleType);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+
+        outState.putSerializable(STATE_IMAGE_SCALE_TYPE, mWineImage.getScaleType());
     }
 }

@@ -3,4 +3,10 @@
 
     <string name="action_settings">Settings</string>
     <string name="reload">Recargar</string>
+    <string name="choose_option">Elegir opción</string>
+    <string name="fit">Ajustada</string>
+    <string name="Justified">Centrada</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Save</string>
+    <string name="settings">Ajustes</string>
 </resources>
