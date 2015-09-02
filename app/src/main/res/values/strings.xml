@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Baccus</string>
 
-    <string name="hello_world">Hola España</string>
     <string name="action_settings">Settings</string>
 </resources>

@@ -92,6 +92,18 @@ public class Wine {
     public void setName(String name) {
         mName = name;
     }
+
+    public void addGrape(String grape){
+        mgrapes.add(grape);
+    }
+
+    public int getGrapesCount(){
+        return mgrapes.size();
+    }
+
+    public String  getGrape(int index){
+        return mgrapes.get(index);
+    }
 }
 
 
