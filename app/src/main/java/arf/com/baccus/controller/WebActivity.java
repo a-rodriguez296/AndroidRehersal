@@ -19,6 +19,9 @@ import arf.com.baccus.model.Wine;
 public class WebActivity extends Activity {
 
 
+
+    private static final String STATE_URL= "url";
+
     //Vistas
     private WebView mBrowser = null;
     private ProgressBar mProgressBar = null;
@@ -70,7 +73,22 @@ public class WebActivity extends Activity {
         mBrowser.getSettings().setBuiltInZoomControls(true);
 
 
-        mBrowser.loadUrl(mWine.getCompanyWeb());
+        if (savedInstanceState == null || !savedInstanceState.containsKey(STATE_URL)){
+            mBrowser.loadUrl(mWine.getCompanyWeb());
+        }
+        else{
+            mBrowser.loadUrl(savedInstanceState.getString(STATE_URL));
+        }
+
+
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(STATE_URL, mBrowser.getUrl());
+    }
+
 }
