@@ -1,12 +1,13 @@
 package arf.com.baccus.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by arodriguez on 9/1/15.
  */
-public class Wine {
+public class Wine implements Serializable{
 
     public Wine(String name, String type, int photo, String companyName, String companyWeb, String notes, String origin, int rating) {
         mName = name;

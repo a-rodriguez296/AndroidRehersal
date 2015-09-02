@@ -1,10 +1,12 @@
 package arf.com.baccus.controller;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -24,7 +26,7 @@ public class WineActivity extends Activity {
     private TextView mWineCompanyText = null;
     private TextView mWineNotesText = null;
     private ViewGroup mWineGrapesContainer = null;
-
+    private Button mGoToWeb = null;
 
 
     //Modelo
@@ -41,7 +43,7 @@ public class WineActivity extends Activity {
         Log.v("Baccus", "Hola mundo");
 
         mWineImage = (ImageView) findViewById(R.id.wine_image);
-        mWine = new Wine("Vegaval","Tinto",R.drawable.logo_facebook,"Casillero del diablo", "adsfasdf","adsfasdfadsf1","Valdepeñas",3);
+        mWine = new Wine("Vegaval","Tinto",R.drawable.logo_facebook,"Casillero del diablo", "http://eltiempo.com","adsfasdfadsf1","Valdepeñas",3);
 
         //Añadir tipos de uvas
         mWine.addGrape("Mencía");
@@ -56,6 +58,7 @@ public class WineActivity extends Activity {
         mWineCompanyText = (TextView) findViewById(R.id.wine_company);
         mWineNotesText = (TextView) findViewById(R.id.wine_notes);
         mWineGrapesContainer = (ViewGroup) findViewById(R.id.grapes_container);
+        mGoToWeb = (Button) findViewById(R.id.go_to_web);
 
 
         //Dar los valores
@@ -79,6 +82,18 @@ public class WineActivity extends Activity {
             mWineGrapesContainer.addView(textView);
 
         }
+
+
+        //Configurar botón
+        mGoToWeb.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent webIntent = new Intent(WineActivity.this, WebActivity.class);
+                webIntent.putExtra(WebActivity.EXTRA_WINE, mWine);
+                startActivity(webIntent);
+            }
+        });
     }
 
     public void changeImage(View v){

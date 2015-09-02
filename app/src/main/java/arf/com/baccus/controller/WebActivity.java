@@ -25,6 +25,7 @@ import arf.com.baccus.model.Wine;
 public class WebActivity extends AppCompatActivity {
 
 
+    public static final String EXTRA_WINE = "wine_extra";
 
     private static final String STATE_URL= "url";
 
@@ -42,7 +43,7 @@ public class WebActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_web);
 
-        mWine = new Wine("Vegaval","Tinto",R.drawable.logo_facebook,"Casillero del diablo", "http://eltiempo.com/","adsfasdfadsf1","Valdepeñas",3);
+        mWine = (Wine) getIntent().getSerializableExtra(EXTRA_WINE);
 
 
         mBrowser = (WebView) findViewById(R.id.browser);
