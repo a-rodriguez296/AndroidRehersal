@@ -1,8 +1,11 @@
 package arf.com.baccus.controller;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -16,7 +19,10 @@ import arf.com.baccus.model.Wine;
 /**
  * Created by arodriguez on 9/1/15.
  */
-public class WebActivity extends Activity {
+
+
+//Para poder el verl menu hay que heredar de AppCompactActivity. DLC, no se ve
+public class WebActivity extends AppCompatActivity {
 
 
 
@@ -91,4 +97,28 @@ public class WebActivity extends Activity {
         outState.putString(STATE_URL, mBrowser.getUrl());
     }
 
+
+
+    //Menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_web, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if (item.getItemId() == R.id.menu_reload){
+            mBrowser.reload();
+        }
+
+        return true;
+    }
 }
