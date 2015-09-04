@@ -24,6 +24,9 @@ public class WineActivity extends AppCompatActivity {
     private static final int SETTINGS_REQUEST = 1;
     private static final String STATE_IMAGE_SCALE_TYPE = "STATE_IMAGE_SCALE_TYPE";
 
+    //Clave para vino que llega por parametro
+    public static final String EXTRA_WINE = "extra_wine";
+
 
     //Vistas
     private ImageView mWineImage = null;
@@ -57,7 +60,9 @@ public class WineActivity extends AppCompatActivity {
             mWineImage.setScaleType((ImageView.ScaleType) savedInstanceState.getSerializable(STATE_IMAGE_SCALE_TYPE));
         }
 
-        mWine = new Wine("Vegaval","Tinto",R.drawable.logo_facebook,"Casillero del diablo", "http://eltiempo.com","adsfasdfadsf1","Valdepeñas",3);
+        mWine = (Wine) getIntent().getSerializableExtra(EXTRA_WINE);
+
+
 
         //Añadir tipos de uvas
         mWine.addGrape("Mencía");
