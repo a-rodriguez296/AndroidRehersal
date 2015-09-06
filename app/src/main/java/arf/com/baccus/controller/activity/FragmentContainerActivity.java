@@ -1,7 +1,5 @@
 package arf.com.baccus.controller.activity;
 
-
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -9,9 +7,7 @@ import android.support.v4.app.Fragment;
 
 import arf.com.baccus.R;
 
-/**
- * Created by arodriguez on 9/3/15.
- */
+
 public abstract class FragmentContainerActivity extends FragmentActivity {
 
 
@@ -29,6 +25,8 @@ public abstract class FragmentContainerActivity extends FragmentActivity {
         //Averiguar si existe el fragment
         if (fragment == null){
             fragment = createFragment();
+
+            //Añadir el fragment al fragment_container
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
@@ -38,3 +36,5 @@ public abstract class FragmentContainerActivity extends FragmentActivity {
 
     protected abstract Fragment createFragment();
 }
+
+

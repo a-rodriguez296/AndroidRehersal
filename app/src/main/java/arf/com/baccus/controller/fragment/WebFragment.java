@@ -1,12 +1,15 @@
-package arf.com.baccus.controller;
+package arf.com.baccus.controller.fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -17,15 +20,11 @@ import arf.com.baccus.R;
 import arf.com.baccus.model.Wine;
 
 /**
- * Created by arodriguez on 9/1/15.
+ * Created by arodriguez on 9/6/15.
  */
+public class WebFragment extends Fragment{
 
-
-//Para poder el verl menu hay que heredar de AppCompactActivity. DLC, no se ve
-public class WebActivity extends AppCompatActivity {
-
-
-    public static final String EXTRA_WINE = "wine_extra";
+    public static final String ARG_WINE = "wine_extra";
 
     private static final String STATE_URL= "url";
 
@@ -37,17 +36,22 @@ public class WebActivity extends AppCompatActivity {
     //Modelo
     private Wine mWine = null;
 
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        setContentView(R.layout.activity_web);
+        //Este es como el set contentView del Activity. Como estoy en un fragment se hace así.
+        //Como retorna un view, este es el que se va a agregar al container. Por esta razón se pone false como parametro
+       View root =   inflater.inflate(R.layout.fragment_web, container, false);
 
-        mWine = (Wine) getIntent().getSerializableExtra(EXTRA_WINE);
 
+        //Forma de los fragmentos de recibir argumentos
+        mWine = (Wine) getArguments().getSerializable(ARG_WINE);
 
-        mBrowser = (WebView) findViewById(R.id.browser);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        //Hay que poner root. para buscar las vistas a partir de la raíz
+
+        mBrowser = (WebView) root.findViewById(R.id.browser);
+        mProgressBar = (ProgressBar) root.findViewById(R.id.progressBar);
 
 
         mBrowser.setWebViewClient(new WebViewClient(){
@@ -89,20 +93,30 @@ public class WebActivity extends AppCompatActivity {
 
 
 
+
+        return root;
     }
 
+
+
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putString(STATE_URL, mBrowser.getUrl());
     }
 
-
-
-    //Menu
+    //Menu forma Fragment
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_web, menu);
+    }
+
+
+    //Menu Forma Activity
+ /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
@@ -110,7 +124,7 @@ public class WebActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_web, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -122,4 +136,6 @@ public class WebActivity extends AppCompatActivity {
 
         return true;
     }
+
+
 }

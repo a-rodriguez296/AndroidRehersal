@@ -1,4 +1,4 @@
-package arf.com.baccus.controller;
+package arf.com.baccus.controller.activity;
 
 import android.app.TabActivity;
 import android.content.Intent;
