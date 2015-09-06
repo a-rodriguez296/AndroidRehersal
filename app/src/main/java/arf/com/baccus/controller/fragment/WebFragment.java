@@ -36,6 +36,16 @@ public class WebFragment extends Fragment{
     //Modelo
     private Wine mWine = null;
 
+
+    //Con esto se le dice explicitamente al Fragment que debe tener un menú
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -136,6 +146,4 @@ public class WebFragment extends Fragment{
 
         return true;
     }
-
-
 }

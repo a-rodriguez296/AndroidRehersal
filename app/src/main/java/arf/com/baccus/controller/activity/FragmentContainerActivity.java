@@ -1,14 +1,14 @@
 package arf.com.baccus.controller.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import arf.com.baccus.R;
 
 
-public abstract class FragmentContainerActivity extends FragmentActivity {
+public abstract class FragmentContainerActivity extends AppCompatActivity {
 
 
     @Override

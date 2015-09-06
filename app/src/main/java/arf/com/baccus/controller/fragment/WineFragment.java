@@ -109,6 +109,10 @@ public class WineFragment extends Fragment{
         }
 
 
+        /*Si en vez de llamar al onClick del botón se hubiera hecho en un método afuera, la aplicación
+        fallaría, dado que el SO busca el método en una actividad y esto es un Fragment*/
+
+
         //Configurar botón
         mGoToWeb.setOnClickListener(new View.OnClickListener(){
 
