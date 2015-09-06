@@ -24,7 +24,7 @@ public class WineryActivity extends TabActivity {
         TabHost tabhost = getTabHost();
 
 
-        Intent intentVegabal = new Intent(this, WineryActivity.class);
+        Intent intentVegabal = new Intent(this, WineActivity.class);
         intentVegabal.putExtra(WineActivity.EXTRA_WINE, vegabal);
 
         //Esto es el código de la pestañan
