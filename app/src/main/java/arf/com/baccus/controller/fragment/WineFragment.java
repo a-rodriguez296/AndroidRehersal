@@ -49,6 +49,13 @@ public class WineFragment extends Fragment{
     //Modelo
     private Wine mWine = null;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
 
     @Nullable
     @Override

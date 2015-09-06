@@ -20,7 +20,7 @@ import arf.com.baccus.model.Wine;
 
 public class WineActivity extends AppCompatActivity {
 
-    private static final int SETTINGS_REQUEST = 1;
+/*    private static final int SETTINGS_REQUEST = 1;
     private static final String STATE_IMAGE_SCALE_TYPE = "STATE_IMAGE_SCALE_TYPE";
 
     //Clave para vino que llega por parametro
@@ -143,7 +143,7 @@ public class WineActivity extends AppCompatActivity {
 
 
             Intent settingsIntent = new Intent(WineActivity.this, SettingsActivity.class);
-            settingsIntent.putExtra(SettingsActivity.EXTRA_WINE_IMAGE_SCALE_TYPE, mWineImage.getScaleType());
+            settingsIntent.putExtra(SettingsActivity.ARG_WINE_IMAGE_SCALE_TYPE, mWineImage.getScaleType());
             startActivityForResult(settingsIntent, SETTINGS_REQUEST);
 
             return true;
@@ -159,7 +159,7 @@ public class WineActivity extends AppCompatActivity {
 
         if (requestCode == SETTINGS_REQUEST && resultCode == RESULT_OK){
 
-            ImageView.ScaleType scaleType = (ImageView.ScaleType) data.getSerializableExtra(SettingsActivity.EXTRA_WINE_IMAGE_SCALE_TYPE);
+            ImageView.ScaleType scaleType = (ImageView.ScaleType) data.getSerializableExtra(SettingsActivity.ARG_WINE_IMAGE_SCALE_TYPE);
             mWineImage.setScaleType(scaleType);
         }
     }
@@ -170,5 +170,5 @@ public class WineActivity extends AppCompatActivity {
 
 
         outState.putSerializable(STATE_IMAGE_SCALE_TYPE, mWineImage.getScaleType());
-    }
+    }*/
 }
