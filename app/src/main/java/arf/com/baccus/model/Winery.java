@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Winery {
 
-    private static Winery sInstance = null:
+    private static Winery sInstance = null;
     private List<Wine> mWines = null;
 
 
