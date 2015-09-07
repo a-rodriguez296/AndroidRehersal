@@ -4,18 +4,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import arf.com.baccus.R;
-import arf.com.baccus.model.Wine;
+import arf.com.baccus.controller.adapter.WineryPagerAdapter;
+
 
 /**
  * Created by arodriguez on 9/6/15.
  */
 public class WineryFragment extends Fragment {
 
+
+    private ViewPager mPager = null;
 
     @Nullable
     @Override
@@ -24,10 +28,15 @@ public class WineryFragment extends Fragment {
 
         View root =  inflater.inflate(R.layout.fragment_winery, container, false);
 
+        mPager = (ViewPager) root.findViewById(R.id.pager);
+        mPager.setAdapter(new WineryPagerAdapter(getFragmentManager()));
 
 
-        Wine vegabal = new Wine("Vegaval","Tinto",R.drawable.logo_facebook,"Casillero del diablo", "http://eltiempo.com","adsfasdfadsf1","Valdepeñas",3);
-        Wine bembibre = new Wine("Bembibre","Tinto",R.drawable.logo_facebook,"Bembibre", "http://eltiempo.com","adsfasdfadsf1","Valdepeñas",3);
+        /*Winery winery = Winery.getInstance();
+
+        Wine vegabal = winery.getWine(0);
+        Wine bembibre = winery.getWine(1);
+
 
 
         //Obtener referencia al tabHost
@@ -47,7 +56,7 @@ public class WineryFragment extends Fragment {
         arguments = new Bundle();
         arguments.putSerializable(WineFragment.ARG_WINE, vegabal);
         tabHost.addTab(tabHost.newTabSpec(vegabal.getName()).
-                setIndicator(vegabal.getName()), WineFragment.class, arguments);
+                setIndicator(vegabal.getName()), WineFragment.class, arguments);*/
 
         return root;
     }
