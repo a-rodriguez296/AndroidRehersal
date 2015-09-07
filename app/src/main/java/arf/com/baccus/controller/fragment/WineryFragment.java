@@ -5,21 +5,26 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import arf.com.baccus.R;
 import arf.com.baccus.controller.adapter.WineryPagerAdapter;
+import arf.com.baccus.model.Winery;
 
 
 /**
  * Created by arodriguez on 9/6/15.
  */
-public class WineryFragment extends Fragment {
+public class WineryFragment extends Fragment implements ViewPager.OnPageChangeListener{
 
 
     private ViewPager mPager = null;
+    private ActionBar mActionBar = null;
+    private Winery mWinery = null;
 
     @Nullable
     @Override
@@ -28,36 +33,39 @@ public class WineryFragment extends Fragment {
 
         View root =  inflater.inflate(R.layout.fragment_winery, container, false);
 
+        mWinery = Winery.getInstance();
+
         mPager = (ViewPager) root.findViewById(R.id.pager);
         mPager.setAdapter(new WineryPagerAdapter(getFragmentManager()));
 
+        mActionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
 
-        /*Winery winery = Winery.getInstance();
+        mPager.setOnPageChangeListener(this);
 
-        Wine vegabal = winery.getWine(0);
-        Wine bembibre = winery.getWine(1);
+        updateActionBar(0);
 
-
-
-        //Obtener referencia al tabHost
-
-        FragmentTabHost tabHost = (FragmentTabHost) root.findViewById(android.R.id.tabhost);
-        tabHost.setup(getActivity(), getActivity().getSupportFragmentManager(), android.R.id.tabcontent);
-
-        //Primera pestaña
-        Bundle arguments = new Bundle();
-        arguments.putSerializable(WineFragment.ARG_WINE, bembibre);
-        tabHost.addTab(tabHost.newTabSpec(bembibre.getName()).
-                setIndicator(bembibre.getName()), WineFragment.class, arguments);
-
-
-
-        //Segunda pestaña
-        arguments = new Bundle();
-        arguments.putSerializable(WineFragment.ARG_WINE, vegabal);
-        tabHost.addTab(tabHost.newTabSpec(vegabal.getName()).
-                setIndicator(vegabal.getName()), WineFragment.class, arguments);*/
 
         return root;
+    }
+
+    private void updateActionBar(int index){
+
+        mActionBar.setTitle(mWinery.getWine(index).getName());
+    }
+
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        updateActionBar(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }
